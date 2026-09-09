@@ -1,0 +1,151 @@
+@import url('./_fonts.css');
+/* @import url(./_data-form.css); */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+a {
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+li {
+  list-style: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+/* login end Signup  */
+
+/* .auth-form {
+  max-width: 422px;
+} */
+
+.auth-input {
+  margin-bottom: 5px;
+}
+.auth-input input {
+  border: 1.5px solid #709fdc;
+  border-radius: 3px;
+  padding: 20px;
+  min-width: 422px;
+  outline: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: #a8aba7;
+  font-family: 'Montserrat', sans-serif;
+}
+.auth-checkbox {
+  max-width: 422px;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+.auth-checkbox input {
+  margin: 0;
+  width: 14px;
+  height: 14px;
+  margin-top: 4px;
+}
+label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #071739;
+  font-family: 'Montserrat', sans-serif;
+}
+label a {
+  text-decoration: solid;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #709fdc;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #709fdc;
+}
+
+.auth-button {
+  margin-bottom: 10px;
+}
+.button {
+  border-radius: 5px;
+  background: #709fdc;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  border: none;
+  cursor: pointer;
+}
+.auth-link {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #071739;
+  font-family: 'Montserrat', sans-serif;
+}
+.auth-link a {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #709fdc;
+  font-family: 'Montserrat', sans-serif;
+  margin-left: 7px;
+}
+.mat-mdc-menu-content {
+  background-color: #fff;
+}
+.mat-mdc-menu-item-text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #519057;
+  font-family: 'Montserrat', sans-serif;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.page-image {
+  margin-left: 185px;
+}
+.auth-title {
+  font-family: 'Lora', sans-serif;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 130%;
+  color: #709fdc;
+  margin-bottom: 40px;
+}
+.auth-checkbox {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+/* data-form */
+/*
+.button:disabled {
+  background-color: #e0e0e0;
+  color: #a0a0a0;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.mat-mdc-progress-spinner circle {
+  stroke: #519057;
+} */

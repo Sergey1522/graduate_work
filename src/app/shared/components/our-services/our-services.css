@@ -1,0 +1,69 @@
+.services {
+  padding-bottom: 120px;
+}
+.service-title {
+  font-family: 'Lora', sans-serif;
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 130%;
+  color: #709fdc;
+  margin-bottom: 40px;
+}
+.service-items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 27px;
+}
+.service-item {
+  width: 290px;
+}
+.service-item-img {
+  border-radius: 5px;
+  width: 291px;
+  height: 291px;
+  margin-bottom: 15px;
+}
+.service-item-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  color: #709fdc;
+  margin-bottom: 10px;
+}
+.service-item-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: #071739;
+  margin-bottom: 33px;
+  width: 280px;
+}
+.service-item-action {
+  display: flex;
+  align-items: center;
+}
+.price {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 130%;
+  color: #709fdc;
+  margin-right: 21px;
+}
+.btn button {
+  border-radius: 5px;
+  padding: 15px 40px;
+  width: 163px;
+  background: #709fdc;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #fff;
+}

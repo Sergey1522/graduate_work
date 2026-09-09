@@ -1,0 +1,31 @@
+.signup {
+  padding: 123px 0 120px 0;
+}
+.signup .container {
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+.auth-button .button {
+  background-color: #709fdc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.button:hover:not(:disabled) {
+  background-color: #709fdc;
+}
+
+.button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
