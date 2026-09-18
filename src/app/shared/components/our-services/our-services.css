@@ -11,12 +11,15 @@
 }
 .service-items {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
   gap: 27px;
 }
 .service-item {
   width: 290px;
+  display: flex;
+  flex-direction: column;
+  height: auto;
 }
 .service-item-img {
   border-radius: 5px;
@@ -44,6 +47,7 @@
 .service-item-action {
   display: flex;
   align-items: center;
+  margin-top: auto;
 }
 .price {
   font-family: 'Montserrat', sans-serif;

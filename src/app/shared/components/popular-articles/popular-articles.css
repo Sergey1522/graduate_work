@@ -1,0 +1,58 @@
+.popular-articles-item {
+  position: relative;
+  width: 292px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.category-badge {
+  position: absolute;
+  top: 10px;
+  right: 9px;
+  border-radius: 5px;
+  padding: 10px 18px;
+  width: 89px;
+  background: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 130%;
+  text-align: center;
+  color: #709fdc;
+}
+.popular-articles-item-img {
+  border-radius: 5px;
+  width: 291px;
+  height: 291px;
+  background-position: center;
+  background-size: cover;
+  margin-bottom: 15px;
+}
+.popular-articles-item-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  color: #709fdc;
+  margin-bottom: 20px;
+}
+.popular-articles-item-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: #071739;
+  margin-bottom: 64px;
+}
+.popular-articles-item-link {
+  margin-top: auto;
+}
+.popular-articles-item-link a {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #709fdc;
+}

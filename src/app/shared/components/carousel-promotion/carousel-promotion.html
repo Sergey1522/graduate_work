@@ -1,7 +1,55 @@
-<section class="headr-carousel">
-  <div class="container">
-    <div class="carousel-content">
+<section class="promo-carousel" (mouseenter)="onMouseEnter()">
+  <!-- Стрелка влево -->
+  <button class="carousel-arrow prev" (click)="prev()" aria-label="Предыдущий">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>
+  </button>
 
-    </div>
+  <!-- Слайды -->
+  <div class="carousel-track">
+    @for (slide of slides(); track slide.id; let i = $index) {
+      <div class="carousel-slide" [class.active]="i === currentIndex()">
+        <div class="slide-content">
+          <!-- Левая часть — текст -->
+          <div class="slide-text">
+            <div class="slide-label">{{ slide.label }}</div>
+
+            <h2 class="slide-title">
+              {{ slide.title }}
+              <span class="slide-accent">{{ slide.accent }}</span>
+            </h2>
+
+            <button class="slide-button" (click)="onButtonClick(slide)">
+              {{ slide.buttonText }}
+            </button>
+          </div>
+
+          <!-- Правая часть — картинка -->
+          <div class="slide-image">
+            <img [src]="slide.image" [alt]="slide.title" />
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Стрелка вправо -->
+  <button class="carousel-arrow next" (click)="next()" aria-label="Следующий">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>
+  </button>
+
+  <!-- Точки -->
+  <div class="carousel-dots">
+    @for (slide of slides(); track slide.id; let i = $index) {
+      <button
+        class="dot"
+        [class.active]="i === currentIndex()"
+        (click)="goTo(i)"
+        [attr.aria-label]="'Слайд ' + (i + 1)"
+      ></button>
+    }
   </div>
 </section>

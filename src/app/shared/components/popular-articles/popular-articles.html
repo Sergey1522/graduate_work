@@ -1,0 +1,14 @@
+<div class="popular-articles-item">
+  <div class="category-badge">{{ topArticle().category }}</div>
+  <div
+    class="popular-articles-item-img"
+    [ngStyle]="{ 'background-image': 'url(' + urlImg + topArticle().image + ')' }"
+  ></div>
+  <div class="popular-articles-item-title">{{ topArticle().title }}</div>
+  <div class="popular-articles-item-text">
+    {{ topArticle().description }}
+  </div>
+  <div class="popular-articles-item-link">
+    <a href="#">Читать дальше</a>
+  </div>
+</div>

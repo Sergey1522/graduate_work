@@ -1,12 +1,12 @@
-.info {
+.about {
   padding-bottom: 120px;
 }
-.info-content {
+.about-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.info-content-desc-title {
+.about-content-desc-title {
   font-family: 'Lora', sans-serif;
   font-weight: 400;
   font-size: 38px;
@@ -14,7 +14,7 @@
   color: #709fdc;
   margin-bottom: 20px;
 }
-.info-content-desc-text {
+.about-content-desc-text {
   max-width: 633px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
@@ -44,4 +44,157 @@
 }
 .advantages-item-text {
   width: 256px;
+}
+/* .popular-articles {
+  padding-bottom: 120px;
+} */
+.popular-articles-title {
+  font-family: 'Lora', sans-serif;
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 130%;
+  color: #709fdc;
+  margin-bottom: 40px;
+}
+.popular-articles-items {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+.popular-articles-more {
+  margin-top: 40px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  color: #709fdc;
+  text-align: end;
+  cursor: pointer;
+}
+.popular-articles-more span {
+  margin-left: 14px;
+}
+/* carousel-promotion.css */
+
+/* ✅ Основной контейнер */
+
+.carousel-content {
+  width: 100%; /* ✅ Вместо 1239px */
+  max-width: 1239px; /* ✅ Адаптивная ширина */
+  min-height: 500px; /* ✅ Вместо height */
+  margin: 0 auto;
+}
+.slide-content {
+  background-image: url(./../../../../assets/images/Ellipse\ 28.png);
+}
+.owl-stage {
+  display: flex;
+  align-items: center;
+  max-width: 1239px; /* ✅ Адаптивная ширина */
+  min-height: 500px;
+}
+/* Reviews about our work */
+.reviews {
+  padding: 120px 0;
+}
+
+.reviews-title {
+  font-family: 'Lora', sans-serif;
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 130%;
+  color: #709fdc;
+  margin-bottom: 20px;
+}
+.reviews-carousel {
+  position: relative;
+}
+
+.reviews-item {
+  border: 2px solid #709fdc;
+  border-radius: 5px;
+  max-width: 396px;
+  padding: 30px;
+}
+.reviews-item-head {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  margin-bottom: 15px;
+}
+.reviews-item-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.reviews-item-name {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 130%;
+  color: #709fdc;
+  font-family: 'Montserrat', sans-serif;
+}
+.reviews-item-text {
+  width: 336px;
+  height: 110px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: #071739;
+  font-family: 'Montserrat', sans-serif;
+}
+.move-backwardRew {
+  position: absolute;
+  top: 50%;
+  left: -36px;
+  cursor: pointer;
+}
+.move-forwardRew {
+  position: absolute;
+  top: 50%;
+  right: -36px;
+  cursor: pointer;
+}
+/* Info */
+.info {
+  padding-bottom: 120px;
+}
+.info-content {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+.info-contact-title {
+  font-family: 'Lora', sans-serif;
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 130%;
+  color: #709fdc;
+  margin-bottom: 20px;
+}
+.contacts .title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  color: #709fdc;
+  margin-bottom: 10px;
+}
+.contacts .block {
+  margin-bottom: 20px;
+}
+.contacts .text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: #071739;
+}
+.contacts-social-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.contacts-social-actions svg {
+  cursor: pointer;
 }

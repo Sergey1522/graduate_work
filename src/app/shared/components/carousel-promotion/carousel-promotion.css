@@ -1,8 +1,237 @@
-.headr-carousel {
-  padding-bottom: 120px;
+/* components/promo-carousel/promo-carousel.css */
+.promo-carousel {
+  position: relative;
+  max-width: 1240px;
+  margin: 0 auto;
+  margin-bottom: 120px;
+  overflow: hidden;
+  background: #b8d4f1;
 }
-.carousel-content {
-  width: 1240px;
-  height: 500px;
-  background-image: url('./../../../../assets/images/Banner-1.png');
+
+/* ✅ Трек */
+.carousel-track {
+  position: relative;
+  min-height: 500px;
+}
+
+/* ✅ Слайд */
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.5s ease,
+    visibility 0.5s ease;
+  pointer-events: none;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.slide-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+  min-height: 500px;
+}
+
+/* ✅ Левая часть — текст */
+.slide-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 40px 60px 80px;
+}
+
+.slide-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #709fdc;
+  margin-bottom: 24px;
+}
+
+.slide-title {
+  font-family: 'Lora', serif;
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 1.2;
+  color: #fff;
+  margin: 0 0 40px;
+}
+
+.slide-accent {
+  color: #709fdc;
+  display: inline;
+}
+
+.slide-button {
+  display: inline-block;
+  padding: 14px 40px;
+  background: #709fdc;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  align-self: flex-start;
+}
+
+.slide-button:hover {
+  background: #5a8bc4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(112, 159, 220, 0.4);
+}
+
+/* ✅ Правая часть — картинка */
+.slide-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50px;
+  width: 100px;
+  height: 100%;
+  /* background: #b8d4f1; */
+  border-radius: 0 -50% 50% 0;
+  z-index: 2;
+}
+
+.slide-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  clip-path: path('M0,0 L700,0 Q900,250 700,500 L0,500 Z');
+}
+
+/* ✅ Стрелки */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  opacity: 0.8;
+}
+
+.carousel-arrow:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.15);
+}
+
+.carousel-arrow.prev {
+  left: 11px;
+}
+.carousel-arrow.next {
+  right: 11px;
+}
+
+/* ✅ Точки */
+.carousel-dots {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  /* background: rgba(255, 255, 255, 0.5); */
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 0;
+}
+
+.dot.active {
+  /* background: #fff; */
+  border: solid 1px #fff;
+  background: transparent;
+  /* transform: scale(1.3); */
+}
+
+.dot:hover:not(.active) {
+  background: #fff;
+}
+
+/* ✅ Адаптивность */
+@media (max-width: 992px) {
+  .slide-title {
+    font-size: 32px;
+  }
+  .slide-text {
+    padding: 40px 30px 40px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .slide-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .slide-text {
+    padding: 30px 24px;
+    text-align: center;
+    align-items: center;
+    order: 2;
+  }
+
+  .slide-image {
+    order: 1;
+    max-height: 250px;
+  }
+
+  .slide-image::before {
+    display: none;
+  }
+  .slide-title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+  .slide-label {
+    font-size: 10px;
+  }
+  .slide-button {
+    align-self: center;
+  }
+
+  .carousel-arrow {
+    width: 32px;
+    height: 32px;
+  }
+  .carousel-arrow.prev {
+    left: 8px;
+  }
+  .carousel-arrow.next {
+    right: 8px;
+  }
 }

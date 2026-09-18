@@ -1,21 +1,28 @@
 <section class="signup">
   <div class="container">
-    <div class="auth-form" appMatchPasswordDirective>
+    <div class="auth-form" [formGroup]="signUpForm" appMatchPasswordDirective>
       <div class="auth-title">Регистрация на сайте</div>
       <div class="auth-inputs">
+        <div class="auth-input">
+          <input
+            type="text"
+            name="name"
+            placeholder="Ваше имя"
+            formControlName="name"
+            [ngStyle]="{
+              'border-color':
+                signUpForm.get('email')?.invalid &&
+                (signUpForm.get('email')?.dirty || signUpForm.get('email')?.touched)
+                  ? 'red'
+                  : '',
+            }"
+          />
+        </div>
         <div class="auth-input">
           <input type="text" name="email" placeholder="Электронная почта" formControlName="email" />
         </div>
         <div class="auth-input">
           <input type="password" name="password" placeholder="Пароль" formControlName="password" />
-        </div>
-        <div class="auth-input">
-          <input
-            type="password"
-            name="passwordRepeat"
-            placeholder="Повторите пароль"
-            formControlName="passwordRepeat"
-          />
         </div>
         <div class="auth-checkbox">
           <input type="checkbox" name="accept" id="accept" formControlName="accept" />
