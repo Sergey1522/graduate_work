@@ -1,6 +1,8 @@
-<app-carousel-promotion></app-carousel-promotion>
-
-<app-our-services (servicesLoaded)="onServicesLoaded($event)"></app-our-services>
+<app-carousel-promotion (orderRequested)="onOrderRequested($event)"></app-carousel-promotion>
+<app-our-services
+  (servicesLoaded)="onServicesLoaded($event)"
+  (orderRequested)="onOrderServicesRequested($event)"
+></app-our-services>
 <section class="about">
   <div class="container">
     <div class="about-content">
@@ -69,7 +71,7 @@
         <app-popular-articles [topArticle]="topArticle"></app-popular-articles>
       }
     </div>
-    <div class="popular-articles-more">
+    <div class="popular-articles-more" routerLink="/blog">
       Перейти в блог
       <span
         ><svg
@@ -241,3 +243,87 @@
     </div>
   </div>
 </section>
+<ng-template #order_service_modal>
+  <div class="order-modal" [formGroup]="popupForm">
+    <div class="order-close-action" (click)="closeModal()">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <line
+          x1="1.93562"
+          y1="2.6499"
+          x2="13.9564"
+          y2="14.6707"
+          stroke="#A8ABA7"
+          stroke-linecap="round"
+        />
+        <line
+          x1="13.9238"
+          y1="2.62971"
+          x2="1.90301"
+          y2="14.6505"
+          stroke="#A8ABA7"
+          stroke-linecap="round"
+        />
+      </svg>
+    </div>
+
+    <div class="order-title">Заявка на услугу</div>
+    <div class="order-form">
+      <div class="order-form-input">
+        <input type="text" name="keyword" formControlName="service" readonly />
+      </div>
+      <div class="order-form-input">
+        <input type="text" name="name" formControlName="name" placeholder="Ваше имя" />
+      </div>
+      <div class="order-form-input">
+        <input type="tel" name="phone" formControlName="phone" placeholder="Ваш номер телефона" />
+      </div>
+    </div>
+    <div class="order-action">
+      <button class="order-action-btn" (click)="submitRequest()">Оставить заявку</button>
+    </div>
+    <div class="error-message"></div>
+  </div>
+</ng-template>
+<ng-template #order_success_modal>
+  <div class="order-modal ok">
+    <div class="order-close-action" (click)="closeModal()">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <line
+          x1="1.93562"
+          y1="2.6499"
+          x2="13.9564"
+          y2="14.6707"
+          stroke="#A8ABA7"
+          stroke-linecap="round"
+        />
+        <line
+          x1="13.9238"
+          y1="2.62971"
+          x2="1.90301"
+          y2="14.6505"
+          stroke="#A8ABA7"
+          stroke-linecap="round"
+        />
+      </svg>
+    </div>
+
+    <div class="order-title">Спасибо за вашу заявку!</div>
+    <div class="order-text">Мы свяжемся с вами при первой же возможности.</div>
+
+    <div class="order-action">
+      <button class="order-action-btn ok" (click)="closeModal()">Окей</button>
+    </div>
+  </div>
+</ng-template>

@@ -18,7 +18,8 @@ export class PromoServices {
     {
       id: 2,
       label: 'Новинка сезона',
-      title: 'Разработка сайтов под ключ для вашего бизнеса',
+      title: 'Нужен грамотный копирайтер?',
+      text: 'Весь декабрь у нас действует акция на работу копирайтера.',
       accent: '-20%!',
       buttonText: 'Подробнее',
       image: 'assets/images/banner-2.png',
@@ -28,6 +29,7 @@ export class PromoServices {
       id: 3,
       label: 'Специальное предложение',
       title: 'SEO-продвижение вашего сайта в топ поисковых систем',
+      text: 'Мы благодарим каждого, кто голосовал за нас!',
       accent: '-25%!',
       buttonText: 'Подробнее',
       image: 'assets/images/banner-3.png',

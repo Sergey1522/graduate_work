@@ -1,0 +1,27 @@
+<section class="blog">
+  <div class="container">
+    <div class="blog-title">Блог</div>
+    <div class="blog-head">
+      <div class="blog-filters"></div>
+      <div class="blog-sorting"></div>
+    </div>
+    <div class="blog-layout">
+      @for (item of allArticles(); track item.id) {
+        <div class="popular-articles-item">
+  <div class="category-badge">{{ item.category }}</div>
+  <div
+    class="popular-articles-item-img"
+    [ngStyle]="{ 'background-image': 'url(' + urlImg + item.image + ')' }"
+  ></div>
+  <div class="popular-articles-item-title">{{ item.title }}</div>
+  <div class="popular-articles-item-text">
+    {{ item.description }}
+  </div>
+  <div class="popular-articles-item-link">
+    <a href="#">Читать дальше</a>
+  </div>
+</div>
+      }
+    </div>
+  </div>
+</section>

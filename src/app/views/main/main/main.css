@@ -198,3 +198,99 @@
 .contacts-social-actions svg {
   cursor: pointer;
 }
+/* Order-modal */
+.order-modal {
+  position: relative;
+  border: 1.5px solid #709fdc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 94px 152px 83px 152px;
+}
+.order-close-action {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  top: 32px;
+  right: 31px;
+  cursor: pointer;
+}
+.order-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.order-title {
+  font-family: 'Lora', sans-serif;
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 130%;
+  color: #709fdc;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.order-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+.order-form-input {
+  width: 422px;
+  max-width: 100%;
+}
+.order-form-input input {
+  border: 1.5px solid #709fdc;
+  border-radius: 3px;
+  padding: 20px 64px 20px 20px;
+  outline: none;
+  color: #709fdc;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+}
+.order-action {
+  display: flex;
+  justify-content: center;
+  width: 422px;
+  max-width: 100%;
+}
+.order-action-btn {
+  width: 100%;
+  border-radius: 5px;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 3px;
+  background: #709fdc;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 130%;
+  cursor: pointer;
+}
+.order-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 130%;
+  text-align: center;
+  color: #1e1a2b;
+  margin-bottom: 40px;
+}
+.order-action-btn.ok {
+  border-radius: 5px;
+  padding: 10px 20px;
+  width: 74px;
+  height: 36px;
+  background: #709fdc;
+}
+.order-modal.ok {
+  padding: 163px 142px;
+}

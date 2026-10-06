@@ -71,3 +71,6 @@
   line-height: 130%;
   color: #fff;
 }
+.mdc-dialog--open .mat-mdc-dialog-surface ::before {
+  border-radius: 10px;
+}

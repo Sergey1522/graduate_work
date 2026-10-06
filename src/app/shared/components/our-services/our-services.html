@@ -7,13 +7,12 @@
           <div
             class="service-item-img"
             [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }"
-          >
-          </div>
+          ></div>
           <div class="service-item-title">{{ item.name }}</div>
           <div class="service-item-text">{{ item.text }}</div>
           <div class="service-item-action">
             <div class="price">От {{ item.price }}</div>
-            <div class="btn">
+            <div class="btn" (click)="onDetailsClick(item)">
               <button>Подробнее</button>
             </div>
           </div>

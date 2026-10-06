@@ -1,22 +1,46 @@
 <section class="login">
   <div class="container">
-    <div class="auth-form" appMatchPasswordDirective>
+    <div class="auth-form" [formGroup]="loginForm" appMatchPasswordDirective>
       <div class="auth-title">Регистрация на сайте</div>
       <div class="auth-inputs">
         <div class="auth-input">
-          <input type="text" name="email" placeholder="Электронная почта" formControlName="email" />
+          <input
+            type="text"
+            name="email"
+            placeholder="Электронная почта"
+            formControlName="email"
+            [ngStyle]="{
+              'border-color':
+                loginForm.get('email')?.invalid &&
+                (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)
+                  ? 'red'
+                  : '',
+            }"
+          />
         </div>
         <div class="auth-input">
-          <input type="password" name="password" placeholder="Пароль" formControlName="password" />
+          <input
+            type="password"
+            name="password"
+            placeholder="Пароль"
+            formControlName="password"
+            [ngStyle]="{
+              'border-color':
+                loginForm.get('password')?.invalid &&
+                (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)
+                  ? 'red'
+                  : '',
+            }"
+          />
         </div>
 
         <div class="auth-checkbox">
-          <input type="checkbox" name="accept" id="accept" formControlName="accept" />
+          <input type="checkbox" name="accept" id="accept" formControlName="rememberMe" />
           <label for="accept">Запомнить меня</label>
         </div>
       </div>
       <div class="auth-button">
-        <button class="button">Войти</button>
+        <button class="button" [disabled]="loginForm.invalid" (click)="login()">Войти</button>
       </div>
       <div class="auth-link">Нет аккаунта? <a routerLink="/signup">Пройдите регистрацию</a></div>
     </div>

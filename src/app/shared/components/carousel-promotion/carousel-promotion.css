@@ -44,7 +44,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 60px 40px 60px 80px;
+  padding: 60px 40px 60px 40px;
 }
 
 .slide-label {
@@ -54,16 +54,24 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #709fdc;
-  margin-bottom: 24px;
 }
 
 .slide-title {
   font-family: 'Lora', serif;
   font-weight: 400;
-  font-size: 44px;
-  line-height: 1.2;
+  font-size: 50px;
+  line-height: 130%;
   color: #fff;
-  margin: 0 0 40px;
+  margin: 0 0 20px;
+}
+.slide-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 130%;
+  color: #fff;
+  max-width: 456px;
+  margin-bottom: 50px;
 }
 
 .slide-accent {

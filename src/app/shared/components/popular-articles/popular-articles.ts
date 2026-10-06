@@ -14,7 +14,7 @@ import { Environments } from '../../../environments/environments';
 export class PopularArticles implements OnInit {
   private articleService = inject(ArticleService);
   urlImg = Environments.urlImg;
-  public readonly topArticle = input.required<TopArticleType>();
+  public readonly topArticle = input<TopArticleType>();
   // topArticles = signal<TopArticleType[]>([]);
 
   ngOnInit(): void {

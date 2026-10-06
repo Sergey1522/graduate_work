@@ -11,6 +11,21 @@
             formControlName="name"
             [ngStyle]="{
               'border-color':
+                signUpForm.get('name')?.invalid &&
+                (signUpForm.get('name')?.dirty || signUpForm.get('name')?.touched)
+                  ? 'red'
+                  : '',
+            }"
+          />
+        </div>
+        <div class="auth-input">
+          <input
+            type="text"
+            name="email"
+            placeholder="Электронная почта"
+            formControlName="email"
+            [ngStyle]="{
+              'border-color':
                 signUpForm.get('email')?.invalid &&
                 (signUpForm.get('email')?.dirty || signUpForm.get('email')?.touched)
                   ? 'red'
@@ -19,10 +34,19 @@
           />
         </div>
         <div class="auth-input">
-          <input type="text" name="email" placeholder="Электронная почта" formControlName="email" />
-        </div>
-        <div class="auth-input">
-          <input type="password" name="password" placeholder="Пароль" formControlName="password" />
+          <input
+            type="password"
+            name="password"
+            placeholder="Пароль"
+            formControlName="password"
+            [ngStyle]="{
+              'border-color':
+                signUpForm.get('password')?.invalid &&
+                (signUpForm.get('password')?.dirty || signUpForm.get('password')?.touched)
+                  ? 'red'
+                  : '',
+            }"
+          />
         </div>
         <div class="auth-checkbox">
           <input type="checkbox" name="accept" id="accept" formControlName="accept" />
@@ -33,7 +57,9 @@
         </div>
       </div>
       <div class="auth-button">
-        <button class="button">Зарегистрироваться</button>
+        <button class="button" [disabled]="signUpForm.invalid" (click)="signup()">
+          Зарегистрироваться
+        </button>
       </div>
       <div class="auth-link">Уже есть аккаунт? <a routerLink="/login">Войдите</a></div>
     </div>

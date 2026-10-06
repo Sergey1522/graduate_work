@@ -44,9 +44,19 @@
             />
           </svg>
         </div>
-        <div class="login-action" [routerLink]="'/signup'">
-          <span>Войти</span>
-        </div>
+        @if (!this.isLogged()) {
+          <div class="login-action" [routerLink]="'/login'">
+            <span>Войти</span>
+          </div>
+        } @else {
+          <div class="user-menu">
+            <button matButton [matMenuTriggerFor]="menu">Привет, {{ userName() }}!</button>
+
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="logout()">Выйти</button>
+            </mat-menu>
+          </div>
+        }
       </div>
     </div>
   </div>

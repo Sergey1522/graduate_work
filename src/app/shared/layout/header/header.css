@@ -29,7 +29,7 @@
   font-family: 'Montserrat', sans-serif;
 }
 .menu-phone {
-  margin-left: 257px;
+  margin-left: 210px;
   margin-right: 141px;
 }
 .menu-phone a {
@@ -57,4 +57,32 @@
   color: #071739;
   font-family: 'Montserrat', sans-serif;
   cursor: pointer;
+}
+::ng-deep .mat-mdc-menu-trigger {
+  display: flex;
+  align-items: center;
+  border: none;
+  background: transparent;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 130%;
+  color: #071739;
+  cursor: pointer;
+}
+::ng-deep .mat-mdc-menu-panel {
+  box-shadow: none !important;
+}
+::ng-deep.mat-mdc-menu-content {
+  padding: 0;
+}
+::ng-deep .mat-mdc-menu-item {
+  font-family: 'Montserrat', sans-serif !important;
+  border: 1.5px solid #709fdc;
+  border-radius: 5px;
+  padding: 8px 20px;
+  width: 128px;
+  height: 37px;
+}
+::ng-deep .mat-mdc-menu-item-text {
+  align-items: center;
 }

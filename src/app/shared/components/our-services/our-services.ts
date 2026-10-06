@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-
+export interface Service {
+  name: string;
+  image: string;
+  text: string;
+  price: string;
+}
 @Component({
   selector: 'app-our-services',
   imports: [CommonModule],
@@ -10,8 +15,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class OurServices implements OnInit {
   services = [
     {
-      image: './../../../assets/images/service-1.png',
       name: 'Создание сайтов',
+      image: './../../../assets/images/service-1.png',
       text: 'В краткие сроки мы создадим качественный и самое главное продающий сайт для продвижения Вашего бизнеса! ',
       price: '7 500₽',
     },
@@ -36,8 +41,14 @@ export class OurServices implements OnInit {
   ];
 
   @Output() servicesLoaded = new EventEmitter<any[]>();
+  @Output() orderRequested = new EventEmitter<Service>();
 
   ngOnInit(): void {
     this.servicesLoaded.emit(this.services);
+  }
+
+  // ✅ Клик по «Подробнее»
+  onDetailsClick(services: Service): void {
+    this.orderRequested.emit(services);
   }
 }

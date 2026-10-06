@@ -1,36 +1,61 @@
+import { PromoSlide } from './../../../../types/promo.type';
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal, TemplateRef, ViewChild } from '@angular/core';
 import { CarouselPromotion } from '../../../shared/components/carousel-promotion/carousel-promotion';
-import { OurServices } from '../../../shared/components/our-services/our-services';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OurServices, Service } from '../../../shared/components/our-services/our-services';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+  ɵInternalFormsSharedModule,
+} from '@angular/forms';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { PopularArticles } from '../../../shared/components/popular-articles/popular-articles';
 import { TopArticleType } from '../../../../types/top.article.type';
 import { ArticleService } from '../../../shared/services/article-service';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { RequestsType } from '../../../../types/requests.type';
+import { RequestsService } from '../../../shared/services/requests-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CommonModule, OurServices, CarouselModule, PopularArticles, CarouselPromotion],
+  imports: [
+    CommonModule,
+    OurServices,
+    CarouselModule,
+    PopularArticles,
+    CarouselPromotion,
+    ɵInternalFormsSharedModule,
+    ReactiveFormsModule,
+    RouterLink,
+  ],
   templateUrl: './main.html',
   styleUrl: './main.css',
 })
 export class Main {
+  private dialog = inject(MatDialog);
   private articleService = inject(ArticleService);
+  private requestsService = inject(RequestsService);
   topArticles = signal<TopArticleType[]>([]);
   receivedServices: any[] = [];
 
   onServicesLoaded(services: any[]) {
     this.receivedServices = services;
   }
+
   private fb = inject(FormBuilder);
-  // ✅ Форма для попапа
-  // popupForm: FormGroup = this.fb.group({
-  //   keyword: [{ value: '', disabled: true }],
-  //   name: ['', [Validators.required, Validators.minLength(2)]],
-  //   phone: ['', [Validators.required, Validators.pattern(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/)]],
-  //   comment: [''],
-  // });
+  popupForm: FormGroup = this.fb.group({
+    type: ['service'],
+    service: [{ value: '', disabled: true }],
+    name: [
+      '',
+      [Validators.required, Validators.minLength(2), Validators.pattern(/^[А-ЯЁ][а-яё]*$/)],
+    ],
+    phone: ['', [Validators.required, Validators.pattern(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/)]],
+  });
 
   customOptionsReviews: OwlOptions = {
     loop: true,
@@ -76,6 +101,48 @@ export class Main {
       text: 'Спасибо огромное АйтиШторму за прекрасный блог с полезными статьями! Именно они и побудили меня углубиться в тему SMM и начать свою карьеру. ',
     },
   ];
+  @ViewChild('order_service_modal') modalTemplate!: TemplateRef<any>;
+  @ViewChild('order_success_modal') thankYouTemplate!: TemplateRef<any>;
+  private dialogRef: MatDialogRef<any> | null = null;
+
+  onOrderRequested(service: PromoSlide): void {
+    this.popupForm.patchValue({
+      service: service.keyword,
+    });
+    this.dialogRef = this.dialog.open(this.modalTemplate, {
+      width: '800px',
+      maxWidth: '95vw',
+      panelClass: 'centered-modal',
+      autoFocus: false,
+      restoreFocus: false,
+    });
+  }
+  onOrderServicesRequested(service: Service): void {
+    this.popupForm.patchValue({
+      service: service.name,
+    });
+    this.dialogRef = this.dialog.open(this.modalTemplate, {
+      width: '800px',
+      maxWidth: '95vw',
+      panelClass: 'centered-modal',
+      autoFocus: false,
+      restoreFocus: false,
+    });
+  }
+  private openSuccessModal(): void {
+    this.dialogRef = this.dialog.open(this.thankYouTemplate, {
+      width: '800px',
+      maxWidth: '95vw',
+      panelClass: 'centered-modal',
+      autoFocus: false,
+      disableClose: false,
+    });
+  }
+
+  closeModal(): void {
+    this.dialogRef?.close();
+    this.popupForm.reset();
+  }
   ngOnInit(): void {
     this.articleService.getTopArticle().subscribe({
       next: (data: TopArticleType[]) => {
@@ -85,36 +152,28 @@ export class Main {
     });
   }
 
-  // ✅ Открытие попапа
-  // openPopup(item: any): void {
-  //   this.popupForm.patchValue({ keyword: item.keyword });
+  submitRequest(): void {
+    if (this.popupForm.invalid) {
+      this.popupForm.markAllAsTouched();
+      return;
+    }
 
-  //   this.dialogRef = this.dialog.open(this.popupTemplate, {
-  //     width: '500px',
-  //     data: { item },
-  //     disableClose: true,
-  //     panelClass: 'custom-dialog-container'
-  //   });
-  // }
+    const requestData: RequestsType = {
+      name: this.popupForm.value.name,
+      phone: this.popupForm.value.phone,
+      service: this.popupForm.getRawValue().service,
+      type: 'order',
+    };
 
-  // ✅ Отправка формы
-  // submitPopup(): void {
-  //   if (this.popupForm.valid) {
-  //     console.log('✅ Форма отправлена:', this.popupForm.getRawValue());
-  //     this.dialogRef?.close();
-  //     this.popupForm.reset();
-  //   } else {
-  //     this.popupForm.markAllAsTouched();
-  //   }
-  // }
-
-  // ✅ Закрытие попапа
-  // closePopup(): void {
-  //   this.dialogRef?.close();
-  // }
-
-  // ✅ Обновление при изменении слайда (опционально)
-  onSlideChanged(event: any): void {
-    console.log('Текущий слайд:', event);
+    this.requestsService.createRequest(requestData).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.closeModal();
+        this.openSuccessModal();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 }
