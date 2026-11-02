@@ -253,7 +253,7 @@
   font-size: 14px;
   line-height: 130%;
   font-family: 'Montserrat', sans-serif;
-  width: 100%;
+  width: 335px;
 }
 .order-action {
   display: flex;
@@ -293,4 +293,8 @@
 }
 .order-modal.ok {
   padding: 163px 142px;
+}
+.custom-order-modal {
+  /* ✅ Перебиваем радиус диалога */
+  --mat-dialog-container-shape: 10px;
 }

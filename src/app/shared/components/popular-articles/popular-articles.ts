@@ -3,11 +3,12 @@ import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { ArticleService } from '../../services/article-service';
 import { CommonModule } from '@angular/common';
 import { Environments } from '../../../environments/environments';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-popular-articles',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './popular-articles.html',
   styleUrl: './popular-articles.css',
 })

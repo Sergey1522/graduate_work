@@ -41,6 +41,7 @@ export class Main {
   private requestsService = inject(RequestsService);
   topArticles = signal<TopArticleType[]>([]);
   receivedServices: any[] = [];
+  inputError = signal<boolean>(false);
 
   onServicesLoaded(services: any[]) {
     this.receivedServices = services;
@@ -155,6 +156,7 @@ export class Main {
   submitRequest(): void {
     if (this.popupForm.invalid) {
       this.popupForm.markAllAsTouched();
+      this.inputError.set(true);
       return;
     }
 

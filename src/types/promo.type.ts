@@ -1,10 +1,12 @@
 export interface PromoSlide {
   id: number;
-  label: string; // "ПРЕДЛОЖЕНИЕ МЕСЯЦА"
-  title: string; // "Продвижение в Instagram..."
+  label: string;
+  title: string;
+  title1?: string;
   text?: string;
-  accent: string; // "-15%!"
-  buttonText: string; // "Подробнее"
-  image: string; // путь к картинке
-  keyword: string; // слово для попапа
+  accent: string;
+  sign: string;
+  buttonText: string;
+  image: string;
+  keyword: string;
 }

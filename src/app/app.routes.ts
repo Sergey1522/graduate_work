@@ -4,6 +4,7 @@ import { Singup } from './views/users/singup/singup';
 import { Login } from './views/users/login/login';
 import { Main } from './views/main/main/main';
 import { Blog } from './views/blog/blog/blog';
+import { BlogDetailed } from './views/blog/blog-detailed/blog-detailed';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,10 @@ export const routes: Routes = [
       {
         path: 'blog',
         component: Blog,
+      },
+      {
+        path: 'blog-detailed/:url',
+        component: BlogDetailed,
       },
       {
         path: 'signup',

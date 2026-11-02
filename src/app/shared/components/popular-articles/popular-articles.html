@@ -9,6 +9,6 @@
     {{ topArticle()?.description }}
   </div>
   <div class="popular-articles-item-link">
-    <a href="#">Читать дальше</a>
+    <a [routerLink]="'/blog-detailed/' + topArticle()?.url">Читать дальше</a>
   </div>
 </div>

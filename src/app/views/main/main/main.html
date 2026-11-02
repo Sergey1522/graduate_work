@@ -278,10 +278,37 @@
         <input type="text" name="keyword" formControlName="service" readonly />
       </div>
       <div class="order-form-input">
-        <input type="text" name="name" formControlName="name" placeholder="Ваше имя" />
+        <input
+          type="text"
+          name="name"
+          formControlName="name"
+          placeholder="Ваше имя"
+          [ngStyle]="{
+            'border-color':
+              popupForm.get('name')?.invalid &&
+              (popupForm.get('name')?.dirty || popupForm.get('name')?.touched)
+                ? 'red'
+                : '',
+          }"
+        />
+        @if (this.inputError()) {
+          <span class="error">Напишите свое имя!</span>
+        }
       </div>
       <div class="order-form-input">
-        <input type="tel" name="phone" formControlName="phone" placeholder="Ваш номер телефона" />
+        <input
+          type="tel"
+          name="phone"
+          formControlName="phone"
+          placeholder="Ваш номер телефона"
+          [ngStyle]="{
+            'border-color':
+              popupForm.get('phone')?.invalid &&
+              (popupForm.get('phone')?.dirty || popupForm.get('phone')?.touched)
+                ? 'red'
+                : '',
+          }"
+        />
       </div>
     </div>
     <div class="order-action">
