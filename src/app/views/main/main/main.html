@@ -291,7 +291,7 @@
                 : '',
           }"
         />
-        @if (this.inputError()) {
+        @if (this.inputError('name')) {
           <span class="error">Напишите свое имя!</span>
         }
       </div>
@@ -309,6 +309,9 @@
                 : '',
           }"
         />
+        @if (this.inputError('phone')) {
+          <span class="error">Напишите номер телефона!</span>
+        }
       </div>
     </div>
     <div class="order-action">

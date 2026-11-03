@@ -17,6 +17,9 @@
                   : '',
             }"
           />
+          @if (this.inputError('email')) {
+            <span class="error">Напишите свое email!</span>
+          }
         </div>
         <div class="auth-input">
           <input
@@ -32,6 +35,9 @@
                   : '',
             }"
           />
+          @if (this.inputError('password')) {
+            <span class="error">Введите пароль!</span>
+          }
         </div>
 
         <div class="auth-checkbox">

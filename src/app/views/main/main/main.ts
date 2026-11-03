@@ -41,7 +41,6 @@ export class Main {
   private requestsService = inject(RequestsService);
   topArticles = signal<TopArticleType[]>([]);
   receivedServices: any[] = [];
-  inputError = signal<boolean>(false);
 
   onServicesLoaded(services: any[]) {
     this.receivedServices = services;
@@ -156,7 +155,6 @@ export class Main {
   submitRequest(): void {
     if (this.popupForm.invalid) {
       this.popupForm.markAllAsTouched();
-      this.inputError.set(true);
       return;
     }
 
@@ -177,5 +175,9 @@ export class Main {
         console.error(err);
       },
     });
+  }
+  inputError(name: string): boolean {
+    const control = this.popupForm.get(name);
+    return !!control?.invalid && (!!control?.dirty || !!control?.touched);
   }
 }

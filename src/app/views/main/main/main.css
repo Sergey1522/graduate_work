@@ -294,7 +294,7 @@
 .order-modal.ok {
   padding: 163px 142px;
 }
-.custom-order-modal {
+::ng-deep.mdc-dialog--open .mat-mdc-dialog-surface {
   /* ✅ Перебиваем радиус диалога */
-  --mat-dialog-container-shape: 10px;
+  border-radius: 10px;
 }

@@ -149,3 +149,8 @@ input::-webkit-inner-spin-button {
 .mat-mdc-progress-spinner circle {
   stroke: #519057;
 } */
+.error {
+  display: inline-flex;
+  color: red;
+  padding-top: 5px;
+}

@@ -64,7 +64,7 @@ export class Singup {
             }
             this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
             this.authService.userId = loginResponse.userId;
-             // ✅ Сохраняем имя пользователя
+            // ✅ Сохраняем имя пользователя
             localStorage.setItem('userName', this.signUpForm.value.name);
 
             // ✅ Уведомляем Header об изменении
@@ -82,5 +82,9 @@ export class Singup {
           },
         });
     }
+  }
+  inputError(name: string): boolean {
+    const control = this.signUpForm.get(name);
+    return !!control?.invalid && (!!control?.dirty || !!control?.touched);
   }
 }

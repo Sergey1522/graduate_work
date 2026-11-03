@@ -1,20 +1,19 @@
-import { CommonModule, NgStyle } from '@angular/common';
-import { Component, DestroyRef, inject, NgModule, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ArticleService } from '../../../shared/services/article-service';
 import { TopArticleType } from '../../../../types/top.article.type';
 import { DetailedArticleType } from '../../../../types/detailed.article.type';
 import { Environments } from '../../../environments/environments';
-import { AllArticleType } from '../../../../types/all.article.type';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DetailedArticleCommentsType } from '../../../../types/detailed.article.comments.type';
 import { CommentType } from '../../../../types/comment.type';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-blog-detailed',
   standalone: true,
-  imports: [CommonModule, RouterLink, ReactiveFormsModule, NgStyle],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule],
   templateUrl: './blog-detailed.html',
   styleUrl: './blog-detailed.css',
 })
@@ -22,6 +21,8 @@ export class BlogDetailed implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   private articleService = inject(ArticleService);
   private destroyRef = inject(DestroyRef);
+  private readonly snackBar = inject(MatSnackBar);
+  private router = inject(Router);
   detailInfo = signal<DetailedArticleType | null>(null);
   readonly topArticle = signal<TopArticleType[]>([]);
 
@@ -29,21 +30,27 @@ export class BlogDetailed implements OnInit {
   readonly comments = signal<CommentType[]>([]);
   urlImg = Environments.urlImg;
   breadcrumb = signal<string>('');
-  readonly commentText = signal('');
   readonly submitting = signal(false);
   readonly commentControl = new FormControl('', {
     nonNullable: true,
     validators: [Validators.required],
   });
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
+    this.activatedRoute.paramMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
+      const url = params.get('url');
+      if (!url) return;
+
       this.articleService
-        .getDetiledArticle(params['url'])
-        .subscribe((data: DetailedArticleType) => {
-          this.detailInfo.set(data);
-          this.breadcrumb.set(data.title);
-          this.loadRelated(data.url);
-          this.loadComments();
+        .getDetiledArticle(url)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe({
+          next: (data) => {
+            this.detailInfo.set(data);
+            this.breadcrumb.set(data.title);
+            this.loadRelated(data.url);
+            this.loadComments();
+          },
+          error: (err) => console.error('Ошибка загрузки статьи', err),
         });
     });
   }
@@ -72,16 +79,7 @@ export class BlogDetailed implements OnInit {
       .addComment(articleId, text)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (comment) => {
-          const current = this.detailInfo();
-          console.log(comment);
-          // if (current) {
-          //   this.detailInfo.set({
-          //     ...current,
-          //     comments: [...(current.comments ?? []), comment],
-          //     commentsCount: (current.commentsCount ?? 0) + 1,
-          //   });
-          // }
+        next: () => {
           this.loadComments();
           this.commentControl.reset();
           this.submitting.set(false);
@@ -89,6 +87,16 @@ export class BlogDetailed implements OnInit {
         error: (err) => {
           console.error('Ошибка отправки', err);
           this.submitting.set(false);
+          if (err.status === 401) {
+            this.snackBar
+              .open('Вы не авторизованы. Войдите, чтобы оставить комментарий.', 'Войти', {
+                duration: 5000,
+              })
+              .onAction()
+              .subscribe(() => this.router.navigate(['/login']));
+          } else {
+            this.snackBar.open('Не удалось отправить комментарий', 'OK', { duration: 3000 });
+          }
         },
       });
   }
@@ -126,8 +134,8 @@ export class BlogDetailed implements OnInit {
   //     });
   // }
 
-  replyTo(comment: CommentType): void {
-    // например, фокус на textarea + префикс @name
-    this.commentText.set(`@${comment.text}, `);
-  }
+  // replyTo(comment: CommentType): void {
+  //   // например, фокус на textarea + префикс @name
+  //   this.commentText.set(`@${comment.text}, `);
+  // }
 }

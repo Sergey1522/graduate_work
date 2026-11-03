@@ -72,4 +72,8 @@ export class Login {
         });
     }
   }
+  inputError(name: string): boolean {
+    const control = this.loginForm.get(name);
+    return !!control?.invalid && (!!control?.dirty || !!control?.touched);
+  }
 }
