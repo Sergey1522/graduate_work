@@ -1,14 +1,26 @@
-<header class="header">
+<header class="header" [class.header--scrolled]="isScrolled()">
   <div class="container">
-    <div class="logo" routerLink="/"><img src="assets/images/Logotype.png" alt="Logo" /></div>
+    <div class="logo" routerLink="/" (click)="scrollToTop()">
+      <img src="assets/images/Logotype.png" alt="Logo" />
+    </div>
     <div class="header-content">
       <nav class="navbar">
         <ul class="menu">
-          <li class="menu-item"><a href="#" class="menu-item-link">Услуги</a></li>
-          <li class="menu-item"><a href="#" class="menu-item-link">О нас</a></li>
-          <li class="menu-item"><a href="#" class="menu-item-link">Статьи</a></li>
-          <li class="menu-item"><a href="#" class="menu-item-link">Отзывы</a></li>
-          <li class="menu-item"><a href="#" class="menu-item-link">Контакты</a></li>
+          <li class="menu-item">
+            <a fragment="services" routerLink="/" class="menu-item-link">Услуги</a>
+          </li>
+          <li class="menu-item">
+            <a fragment="about" routerLink="/" class="menu-item-link">О нас</a>
+          </li>
+          <li class="menu-item">
+            <a routerLink="/blog" class="menu-item-link">Статьи</a>
+          </li>
+          <li class="menu-item">
+            <a fragment="reviews" routerLink="/" class="menu-item-link">Отзывы</a>
+          </li>
+          <li class="menu-item">
+            <a fragment="info" routerLink="/" class="menu-item-link">Контакты</a>
+          </li>
         </ul>
       </nav>
       <div class="menu-phone"><a href="tel:+7 (499) 343-13-34">+7 (499) 343-13-34</a></div>

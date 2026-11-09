@@ -19,6 +19,12 @@ app-layout {
   flex-direction: column;
   flex: 1;
 }
+app-header {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
 main {
   flex: 1 0 auto;

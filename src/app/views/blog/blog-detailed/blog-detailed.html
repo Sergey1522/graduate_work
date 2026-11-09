@@ -131,7 +131,7 @@
 
           <!-- Список комментариев -->
           <div class="block-comments">
-            @for (comment of comments(); track comment) {
+            @for (comment of comments(); track comment.id) {
               <div class="block-comment">
                 <div class="block-comment-info">
                   <div class="block-comment-logo">
@@ -179,7 +179,12 @@
                 <div class="block-comment-text">{{ comment.text }}</div>
 
                 <div class="block-comment-actions">
-                  <button type="button" class="comment-action" aria-label="Полезно">
+                  <button
+                    type="button"
+                    class="comment-action"
+                    (click)="like(comment, 'like')"
+                    aria-label="Полезно"
+                  >
                     <span>{{ comment.likesCount }}</span>
                     <svg
                       width="24"
@@ -204,7 +209,12 @@
                     </svg>
                   </button>
 
-                  <button type="button" class="comment-action" aria-label="Не полезно">
+                  <button
+                    type="button"
+                    class="comment-action"
+                    (click)="like(comment, 'dislike')"
+                    aria-label="Не полезно"
+                  >
                     <span>{{ comment.dislikesCount }}</span>
                     <svg
                       width="24"

@@ -271,6 +271,7 @@
   align-items: center;
   border: 0;
   background: transparent;
+  cursor: pointer;
 }
 .comment-action span {
   margin-right: 3px;

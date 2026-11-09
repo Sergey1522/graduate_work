@@ -80,7 +80,7 @@
   padding: 12px 23px;
   position: absolute;
   z-index: 3;
-  right: 24%;
+  right: 652px;
   box-sizing: border-box;
 }
 .blog-sorting.open .blog-sorting-items {
@@ -89,6 +89,18 @@
 }
 .blog-sorting.open .blog-sorting-item span {
   display: inline-flex;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #bebebe;
+}
+.blog-sorting.open .blog-sorting-item span.active {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #071739;
 }
 .blog-sorting.open .blog-sorting-item a.active {
   font-family: 'Montserrat', sans-serif;

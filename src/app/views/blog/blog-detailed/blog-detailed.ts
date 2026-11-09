@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ArticleService } from '../../../shared/services/article-service';
 import { TopArticleType } from '../../../../types/top.article.type';
@@ -9,6 +9,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommentType } from '../../../../types/comment.type';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AuthServices } from '../../../core/auth/auth-services';
 
 @Component({
   selector: 'app-blog-detailed',
@@ -20,21 +22,23 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class BlogDetailed implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   private articleService = inject(ArticleService);
+  private authServices = inject(AuthServices);
   private destroyRef = inject(DestroyRef);
   private readonly snackBar = inject(MatSnackBar);
   private router = inject(Router);
   detailInfo = signal<DetailedArticleType | null>(null);
   readonly topArticle = signal<TopArticleType[]>([]);
-
   readonly commentsCount = signal(0);
   readonly comments = signal<CommentType[]>([]);
   urlImg = Environments.urlImg;
   breadcrumb = signal<string>('');
   readonly submitting = signal(false);
+  readonly commentsForbidden = signal(false);
   readonly commentControl = new FormControl('', {
     nonNullable: true,
     validators: [Validators.required],
   });
+  readonly isLoggedIn = computed(() => !!this.authServices.getTokens()?.accessToken);
   ngOnInit(): void {
     this.activatedRoute.paramMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       const url = params.get('url');
@@ -101,6 +105,7 @@ export class BlogDetailed implements OnInit {
       });
   }
   private loadComments(): void {
+    if (!this.authServices.getIsLoggedIn()) return;
     const articleId = this.detailInfo()?.id;
     if (!articleId) return;
 
@@ -112,30 +117,35 @@ export class BlogDetailed implements OnInit {
           console.log(data);
           this.comments.set(data.comments ?? []);
           this.commentsCount.set(data.allCount ?? 0);
+          this.commentsForbidden.set(false);
         },
-        error: (err) => console.error('Ошибка загрузки комментариев', err),
+        error: (err: HttpErrorResponse) => {
+          console.error('Ошибка загрузки комментариев', err);
+          if (err.status === 401 || err.status === 403) {
+            this.commentsForbidden.set(true);
+          }
+        },
       });
   }
+  like(comment: CommentType, action: 'like' | 'dislike'): void {
+    const articleId = this.detailInfo()?.id;
+    if (!articleId) return;
 
-  // like(comment: DetailedArticleType, value: 1 | 0): void {
-  //   const articleId = this.detailInfo()?.id;
-  //   if (!articleId) return;
-
-  //   this.articleService
-  //     .reactToComment(articleId, comment.id, value)
-  //     .pipe(takeUntilDestroyed(this.destroyRef))
-  //     .subscribe((updated) => {
-  //       const current = this.detailInfo();
-  //       if (!current?.comments) return;
-  //       this.detailInfo.set({
-  //         ...current,
-  //         comments: current.comments.map((c) => (c.id === updated.id ? updated : c)),
-  //       });
-  //     });
-  // }
-
-  // replyTo(comment: CommentType): void {
-  //   // например, фокус на textarea + префикс @name
-  //   this.commentText.set(`@${comment.text}, `);
-  // }
+    this.articleService
+      .applyCommentAction(comment.id, action)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.loadComments();
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error('Ошибка реакции', err);
+          if (err.status === 401) {
+            this.snackBar.open('Войдите, чтобы оценивать комментарии.', 'Войти', {
+              duration: 5000,
+            });
+          }
+        },
+      });
+  }
 }

@@ -19,6 +19,7 @@
   line-height: 130%;
   text-align: center;
   color: #709fdc;
+  box-sizing: border-box;
 }
 .popular-articles-item-img {
   border-radius: 5px;

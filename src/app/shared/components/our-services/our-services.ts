@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-export interface Service {
-  name: string;
-  image: string;
-  text: string;
-  price: string;
-}
+import { ServiceType } from '../../../../types/service.type';
+// export interface Service {
+//   name: string;
+//   image: string;
+//   text: string;
+//   price: string;
+// }
 @Component({
   selector: 'app-our-services',
   imports: [CommonModule],
@@ -13,7 +14,7 @@ export interface Service {
   styleUrl: './our-services.css',
 })
 export class OurServices implements OnInit {
-  services = [
+  services: ServiceType[] = [
     {
       name: 'Создание сайтов',
       image: './../../../assets/images/service-1.png',
@@ -41,14 +42,14 @@ export class OurServices implements OnInit {
   ];
 
   @Output() servicesLoaded = new EventEmitter<any[]>();
-  @Output() orderRequested = new EventEmitter<Service>();
+  @Output() orderRequested = new EventEmitter<ServiceType>();
 
   ngOnInit(): void {
     this.servicesLoaded.emit(this.services);
   }
 
   // ✅ Клик по «Подробнее»
-  onDetailsClick(services: Service): void {
+  onDetailsClick(services: ServiceType): void {
     this.orderRequested.emit(services);
   }
 }

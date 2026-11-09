@@ -2,7 +2,7 @@ import { PromoSlide } from './../../../../types/promo.type';
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal, TemplateRef, ViewChild } from '@angular/core';
 import { CarouselPromotion } from '../../../shared/components/carousel-promotion/carousel-promotion';
-import { OurServices, Service } from '../../../shared/components/our-services/our-services';
+import { OurServices } from '../../../shared/components/our-services/our-services';
 import {
   FormBuilder,
   FormGroup,
@@ -18,6 +18,7 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { RequestsType } from '../../../../types/requests.type';
 import { RequestsService } from '../../../shared/services/requests-service';
 import { RouterLink } from '@angular/router';
+import { ServiceType } from '../../../../types/service.type';
 
 @Component({
   selector: 'app-main',
@@ -52,9 +53,9 @@ export class Main {
     service: [{ value: '', disabled: true }],
     name: [
       '',
-      [Validators.required, Validators.minLength(2), Validators.pattern(/^[А-ЯЁ][а-яё]*$/)],
+      [Validators.required, Validators.minLength(2), Validators.pattern(/^[А-ЯЁа-яё\s\-']{2,}$/)],
     ],
-    phone: ['', [Validators.required, Validators.pattern(/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/)]],
+    phone: ['', [Validators.required, Validators.pattern(/^\+?[\d\s\-()]{10,}$/)]],
   });
 
   customOptionsReviews: OwlOptions = {
@@ -117,7 +118,7 @@ export class Main {
       restoreFocus: false,
     });
   }
-  onOrderServicesRequested(service: Service): void {
+  onOrderServicesRequested(service: ServiceType): void {
     this.popupForm.patchValue({
       service: service.name,
     });

@@ -7,6 +7,7 @@ import { AllArticleType } from '../../../types/all.article.type';
 import { DetailedArticleType } from '../../../types/detailed.article.type';
 import { DetailedArticleCommentsType } from '../../../types/detailed.article.comments.type';
 import { CommentType } from '../../../types/comment.type';
+import { DefaultResponseType } from '../../../types/default.response.type';
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +47,15 @@ export class ArticleService {
     return this.http.get<{ allCount: number; comments: CommentType[] }>(
       Environments.api + 'comments',
       { params: { article: articleId, offset } },
+    );
+  }
+  applyCommentAction(
+    commentId: string,
+    action: 'like' | 'dislike' | 'violate',
+  ): Observable<DefaultResponseType> {
+    return this.http.post<DefaultResponseType>(
+      Environments.api + 'comments/' + commentId + '/apply-action',
+      { action },
     );
   }
 }

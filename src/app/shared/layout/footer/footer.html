@@ -22,7 +22,7 @@
         <div class="footer-info-title">Телефон</div>
 
         <span>+7 (499) 343-13-34</span>
-        <a href="tel:+7 (499) 343-13-34" class="footer-phone-btn">Перезвоните мне</a>
+        <a (click)="onOrderRequested()" class="footer-phone-btn">Перезвоните мне</a>
       </div>
       <div class="footer-mail">
         <div class="footer-info-title">E-mail</div>
@@ -80,3 +80,114 @@
     <div class="copyright">© 2022. Все права защищены</div>
   </div>
 </footer>
+<ng-template #order_service_modal>
+  <div class="order-modal" [formGroup]="popupForm">
+    <div class="order-close-action" (click)="closeModal()">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <line
+          x1="1.93562"
+          y1="2.6499"
+          x2="13.9564"
+          y2="14.6707"
+          stroke="#A8ABA7"
+          stroke-linecap="round"
+        />
+        <line
+          x1="13.9238"
+          y1="2.62971"
+          x2="1.90301"
+          y2="14.6505"
+          stroke="#A8ABA7"
+          stroke-linecap="round"
+        />
+      </svg>
+    </div>
+
+    <div class="order-title">Закажите бесплатную консультацию!</div>
+    <div class="order-form">
+      <div class="order-form-input">
+        <input
+          type="text"
+          name="name"
+          formControlName="name"
+          placeholder="Ваше имя"
+          [ngStyle]="{
+            'border-color':
+              popupForm.get('name')?.invalid &&
+              (popupForm.get('name')?.dirty || popupForm.get('name')?.touched)
+                ? 'red'
+                : '',
+          }"
+        />
+        @if (this.inputError('name')) {
+          <span class="error">Напишите свое имя!</span>
+        }
+      </div>
+      <div class="order-form-input">
+        <input
+          type="tel"
+          name="phone"
+          formControlName="phone"
+          placeholder="Ваш номер телефона"
+          [ngStyle]="{
+            'border-color':
+              popupForm.get('phone')?.invalid &&
+              (popupForm.get('phone')?.dirty || popupForm.get('phone')?.touched)
+                ? 'red'
+                : '',
+          }"
+        />
+        @if (this.inputError('phone')) {
+          <span class="error">Напишите номер телефона!</span>
+        }
+      </div>
+    </div>
+    <div class="order-action">
+      <button class="order-action-btn" (click)="submitRequest()">Оставить заявку</button>
+    </div>
+    <div class="error-message"></div>
+  </div>
+</ng-template>
+<ng-template #order_success_modal>
+  <div class="order-modal ok">
+    <div class="order-close-action" (click)="closeModal()">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <line
+          x1="1.93562"
+          y1="2.6499"
+          x2="13.9564"
+          y2="14.6707"
+          stroke="#A8ABA7"
+          stroke-linecap="round"
+        />
+        <line
+          x1="13.9238"
+          y1="2.62971"
+          x2="1.90301"
+          y2="14.6505"
+          stroke="#A8ABA7"
+          stroke-linecap="round"
+        />
+      </svg>
+    </div>
+
+    <div class="order-title">Спасибо за вашу заявку!</div>
+    <div class="order-text">Мы свяжемся с вами при первой же возможности.</div>
+
+    <div class="order-action">
+      <button class="order-action-btn ok" (click)="closeModal()">Окей</button>
+    </div>
+  </div>
+</ng-template>

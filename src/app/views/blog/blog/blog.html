@@ -67,7 +67,9 @@
               <li class="blog-sorting-item" (click)="TypeCategory(item.name)">
                 <a [class.active]="isSelected(item.name)">{{ item.name }}</a>
 
-                <span>{{ isSelected(item.name) ? '−' : '+' }}</span>
+                <span [class.active]="isSelected(item.name)">{{
+                  isSelected(item.name) ? '−' : '+'
+                }}</span>
               </li>
             }
           </ul>

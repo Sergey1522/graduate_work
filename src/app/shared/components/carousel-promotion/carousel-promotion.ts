@@ -9,8 +9,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { PromoSlide } from '../../../../types/promo.type';
 import { PromoServices } from '../../services/promo-services';
 
@@ -23,19 +22,12 @@ import { PromoServices } from '../../services/promo-services';
   encapsulation: ViewEncapsulation.None,
 })
 export class CarouselPromotion {
-  private fb = inject(FormBuilder);
   private promoService = inject(PromoServices);
   @Output() orderRequested = new EventEmitter<PromoSlide>();
   slides = this.promoService.getSlides();
   currentIndex = signal(0);
 
-  private autoPlayInterval: any;
-
   ngOnInit(): void {}
-
-  ngOnDestroy(): void {
-    this.stopAutoPlay();
-  }
 
   onDetailsClick(service: PromoSlide): void {
     this.orderRequested.emit(service);
@@ -51,21 +43,6 @@ export class CarouselPromotion {
 
   goTo(index: number): void {
     this.currentIndex.set(index);
-    this.restartAutoPlay();
-  }
-
-  private stopAutoPlay(): void {
-    if (this.autoPlayInterval) {
-      clearInterval(this.autoPlayInterval);
-    }
-  }
-
-  private restartAutoPlay(): void {
-    this.stopAutoPlay();
-  }
-
-  onMouseEnter(): void {
-    this.stopAutoPlay();
   }
 
   @ViewChild('popupTemplate') popupTemplate!: TemplateRef<any>;

@@ -1,8 +1,9 @@
-import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, HostListener, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthServices } from '../../../core/auth/auth-services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { ScrollService } from '../../services/scroll-service';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ export class Header implements OnInit {
   private authService = inject(AuthServices);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
+  readonly isScrolled = signal(false);
   isLogged = signal<boolean>(false);
   userName = signal<string>('');
   isMenuOpen = signal<boolean>(false);
@@ -31,8 +33,24 @@ export class Header implements OnInit {
       }
     });
   }
+  @HostListener('window:scroll')
+  onScroll(): void {
+    this.isScrolled.set(window.scrollY > 10);
+  }
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger | undefined;
 
+  // scrollToSection(id: string): void {
+  //   const element = document.getElementById(id);
+  //   if (!element) return;
+
+  //   const headerHeight = 130;
+  //   const y = element.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+  //   window.scrollTo({ top: y, behavior: 'smooth' });
+  // }
   someMethod() {
     if (this.trigger) {
       this.trigger.openMenu();
