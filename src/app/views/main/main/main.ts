@@ -19,6 +19,7 @@ import { RequestsType } from '../../../../types/requests.type';
 import { RequestsService } from '../../../shared/services/requests-service';
 import { RouterLink } from '@angular/router';
 import { ServiceType } from '../../../../types/service.type';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-main',
@@ -42,6 +43,7 @@ export class Main {
   private requestsService = inject(RequestsService);
   topArticles = signal<TopArticleType[]>([]);
   receivedServices: any[] = [];
+  requestErrorMessage = signal<boolean>(false);
 
   onServicesLoaded(services: any[]) {
     this.receivedServices = services;
@@ -154,6 +156,7 @@ export class Main {
   }
 
   submitRequest(): void {
+    this.requestErrorMessage.set(false);
     if (this.popupForm.invalid) {
       this.popupForm.markAllAsTouched();
       return;
@@ -172,8 +175,11 @@ export class Main {
         this.closeModal();
         this.openSuccessModal();
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => {
         console.error(err);
+        if (err.status === 500) {
+          this.requestErrorMessage.set(true);
+        }
       },
     });
   }

@@ -110,7 +110,7 @@ label a {
   font-weight: 400;
   font-size: 16px;
   line-height: 130%;
-  color: #519057;
+  color: #709fdc;
   font-family: 'Montserrat', sans-serif;
 }
 input::-webkit-outer-spin-button,
@@ -245,4 +245,51 @@ input::-webkit-inner-spin-button {
 }
 .order-modal.ok {
   padding: 163px 142px;
+}
+
+/* Панель меню */
+.user-menu-panel.mat-mdc-menu-panel {
+  box-shadow: none !important;
+  border-radius: 5px;
+  background: #fff;
+  margin-top: 8px;
+}
+
+/* Контент меню */
+.user-menu-panel .mat-mdc-menu-content {
+  padding: 0;
+}
+
+/* Пункт меню */
+.user-menu-panel .mat-mdc-menu-item {
+  font-family: 'Montserrat', sans-serif;
+  border: 1.5px solid #709fdc;
+  border-radius: 5px;
+  padding: 8px 20px;
+  width: 128px;
+  height: 37px;
+  min-height: 37px; /* Material задаёт min-height: 48px — перебиваем */
+  line-height: 1;
+  color: #071739;
+}
+
+/* Текст пункта */
+.user-menu-panel .mat-mdc-menu-item-text {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Hover */
+.user-menu-panel .mat-mdc-menu-item:hover {
+  background: #f5f9ff;
+}
+.error-message {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 130%;
+  color: #bf0303;
+  margin-top: 10px;
 }

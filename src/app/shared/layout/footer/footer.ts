@@ -1,15 +1,17 @@
-import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
+import { Component, inject, signal, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { CommonModule } from '@angular/common';
 import { RequestsType } from '../../../../types/requests.type';
 import { RequestsService } from '../../services/requests-service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })
@@ -17,6 +19,7 @@ export class Footer {
   private requestsService = inject(RequestsService);
   private dialog = inject(MatDialog);
   private fb = inject(FormBuilder);
+  requestErrorMessage = signal<boolean>(false);
   popupForm: FormGroup = this.fb.group({
     type: ['service'],
     service: [{ value: 'Фриланс', disabled: true }],
@@ -67,8 +70,11 @@ export class Footer {
         this.closeModal();
         this.openSuccessModal();
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => {
         console.error(err);
+        if (err.status === 500) {
+          this.requestErrorMessage.set(true);
+        }
       },
     });
   }
@@ -80,5 +86,8 @@ export class Footer {
   inputError(name: string): boolean {
     const control = this.popupForm.get(name);
     return !!control?.invalid && (!!control?.dirty || !!control?.touched);
+  }
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

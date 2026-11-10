@@ -1,15 +1,27 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-menu">
-      <div class="logo"><img src="assets/images/Logotype.png" alt="Logo" /></div>
+      <div class="logo" routerLink="/" (click)="scrollToTop()">
+      <img src="assets/images/Logotype.png" alt="Logo" />
+    </div>
 
       <nav class="navbar">
         <ul class="menu">
-          <li class="menu-item"><a href="#" class="menu-item-link">Услуги</a></li>
-          <li class="menu-item"><a href="#" class="menu-item-link">О нас</a></li>
-          <li class="menu-item"><a href="#" class="menu-item-link">Статьи</a></li>
-          <li class="menu-item"><a href="#" class="menu-item-link">Отзывы</a></li>
-          <li class="menu-item"><a href="#" class="menu-item-link">Контакты</a></li>
+          <li class="menu-item">
+            <a fragment="services" routerLink="/" class="menu-item-link">Услуги</a>
+          </li>
+          <li class="menu-item">
+            <a fragment="about" routerLink="/" class="menu-item-link">О нас</a>
+          </li>
+          <li class="menu-item">
+            <a routerLink="/blog" class="menu-item-link">Статьи</a>
+          </li>
+          <li class="menu-item">
+            <a fragment="reviews" routerLink="/" class="menu-item-link">Отзывы</a>
+          </li>
+          <li class="menu-item">
+            <a fragment="info" routerLink="/" class="menu-item-link">Контакты</a>
+          </li>
         </ul>
       </nav>
     </div>
@@ -151,7 +163,9 @@
     <div class="order-action">
       <button class="order-action-btn" (click)="submitRequest()">Оставить заявку</button>
     </div>
-    <div class="error-message"></div>
+    @if (requestErrorMessage()) {
+      <div class="error-message">Ошибка при отправке формы. Попробуйте еще раз</div>
+    }
   </div>
 </ng-template>
 <ng-template #order_success_modal>

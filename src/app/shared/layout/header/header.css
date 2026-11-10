@@ -33,7 +33,7 @@
   font-family: 'Montserrat', sans-serif;
 }
 .menu-phone {
-  margin-left: 210px;
+  margin-left: 177px;
   margin-right: 141px;
 }
 .menu-phone a {
@@ -46,6 +46,8 @@
 .login {
   display: flex;
   align-items: center;
+  width: 200px;
+  justify-content: center;
 }
 .login-icon {
   padding-top: 3px;
@@ -62,7 +64,7 @@
   font-family: 'Montserrat', sans-serif;
   cursor: pointer;
 }
-::ng-deep .mat-mdc-menu-trigger {
+.mat-mdc-menu-trigger {
   display: flex;
   align-items: center;
   border: none;

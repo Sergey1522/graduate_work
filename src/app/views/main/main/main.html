@@ -317,7 +317,9 @@
     <div class="order-action">
       <button class="order-action-btn" (click)="submitRequest()">Оставить заявку</button>
     </div>
-    <div class="error-message"></div>
+    @if (requestErrorMessage()) {
+      <div class="error-message">Ошибка при отправке формы. Попробуйте еще раз</div>
+    }
   </div>
 </ng-template>
 <ng-template #order_success_modal>

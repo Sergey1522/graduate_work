@@ -60,8 +60,14 @@
         <div class="auth-checkbox">
           <input type="checkbox" name="accept" id="accept" formControlName="accept" />
           <label for="accept"
-            >Я принимаю <a href="">условия пользовательского соглашения</a> и даю согласие
-            <a href="">на обработку персональных данных.</a></label
+            >Я принимаю
+            <a routerLink="/policy" fragment="terms" target="_blank" rel="noopener noreferrer"
+              >условия пользовательского соглашения</a
+            >
+            и даю согласие
+            <a routerLink="/policy" fragment="privacy" target="_blank" rel="noopener noreferrer"
+              >на обработку персональных данных.</a
+            ></label
           >
         </div>
       </div>

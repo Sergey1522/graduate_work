@@ -5,6 +5,7 @@ import { Login } from './views/users/login/login';
 import { Main } from './views/main/main/main';
 import { Blog } from './views/blog/blog/blog';
 import { BlogDetailed } from './views/blog/blog-detailed/blog-detailed';
+import { Policy } from './views/users/policy/policy';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,7 @@ export const routes: Routes = [
         path: 'login',
         component: Login,
       },
+      { path: 'policy', component: Policy },
     ],
   },
 ];

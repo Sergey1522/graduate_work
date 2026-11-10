@@ -3,10 +3,11 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthServices } from '../../../core/auth/auth-services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
-import { ScrollService } from '../../services/scroll-service';
+
 
 @Component({
   selector: 'app-header',
+  standalone: true,
   imports: [RouterLink, MatMenuModule],
   templateUrl: './header.html',
   styleUrl: './header.css',
@@ -42,15 +43,6 @@ export class Header implements OnInit {
   }
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger | undefined;
 
-  // scrollToSection(id: string): void {
-  //   const element = document.getElementById(id);
-  //   if (!element) return;
-
-  //   const headerHeight = 130;
-  //   const y = element.getBoundingClientRect().top + window.scrollY - headerHeight;
-
-  //   window.scrollTo({ top: y, behavior: 'smooth' });
-  // }
   someMethod() {
     if (this.trigger) {
       this.trigger.openMenu();
