@@ -52,7 +52,11 @@ export class Login {
               this._snackbar.open(error);
               throw new Error(error);
             }
-            this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
+            this.authService.setTokens(
+              loginResponse.accessToken,
+              loginResponse.refreshToken,
+              loginResponse.name ?? '',
+            );
             this.authService.userId = loginResponse.userId;
 
             this._snackbar.open('Вы успешно авторизовались', '', {

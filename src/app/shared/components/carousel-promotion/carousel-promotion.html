@@ -1,54 +1,56 @@
 <section class="promo-carousel">
-  <button class="carousel-arrow prev" (click)="prev()" aria-label="Предыдущий">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-    </svg>
-  </button>
+  <div class="container">
+    <button class="carousel-arrow prev" (click)="prev()" aria-label="Предыдущий">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
 
-  <div class="carousel-track">
-    @for (slide of slides(); track slide.id; let i = $index) {
-      <div class="carousel-slide" [class.active]="i === currentIndex()">
-        <div class="slide-content">
-          <div class="slide-text">
-            <div class="slide-label">{{ slide.label }}</div>
+    <div class="carousel-track">
+      @for (slide of slides(); track slide.id; let i = $index) {
+        <div class="carousel-slide" [class.active]="i === currentIndex()">
+          <div class="slide-content">
+            <div class="slide-text">
+              <div class="slide-label">{{ slide.label }}</div>
 
-            <h2 class="slide-title">
-              <span class="slide-title1">{{ slide.title1 }}</span>
-              {{ slide.title }}
-              <span class="slide-accent">{{ slide.accent }}</span>
-              <span class="slide-sign">{{ slide.sign }}</span>
-            </h2>
-            @if (slide.text) {
-              <p class="slide-desc">{{ slide.text }}</p>
-            }
+              <h2 class="slide-title">
+                <span class="slide-title1">{{ slide.title1 }}</span>
+                {{ slide.title }}
+                <span class="slide-accent">{{ slide.accent }}</span>
+                <span class="slide-sign">{{ slide.sign }}</span>
+              </h2>
+              @if (slide.text) {
+                <p class="slide-desc">{{ slide.text }}</p>
+              }
 
-            <button class="slide-button" (click)="onDetailsClick(slide)">
-              {{ slide.buttonText }}
-            </button>
-          </div>
+              <button class="slide-button" (click)="onDetailsClick(slide)">
+                {{ slide.buttonText }}
+              </button>
+            </div>
 
-          <div class="slide-image">
-            <img [src]="slide.image" [alt]="slide.title" />
+            <div class="slide-image">
+              <img [src]="slide.image" [alt]="slide.title" />
+            </div>
           </div>
         </div>
-      </div>
-    }
-  </div>
+      }
+    </div>
 
-  <button class="carousel-arrow next" (click)="next()" aria-label="Следующий">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-    </svg>
-  </button>
+    <button class="carousel-arrow next" (click)="next()" aria-label="Следующий">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
 
-  <div class="carousel-dots">
-    @for (slide of slides(); track slide.id; let i = $index) {
-      <button
-        class="dot"
-        [class.active]="i === currentIndex()"
-        (click)="goTo(i)"
-        [attr.aria-label]="'Слайд ' + (i + 1)"
-      ></button>
-    }
+    <div class="carousel-dots">
+      @for (slide of slides(); track slide.id; let i = $index) {
+        <button
+          class="dot"
+          [class.active]="i === currentIndex()"
+          (click)="goTo(i)"
+          [attr.aria-label]="'Слайд ' + (i + 1)"
+        ></button>
+      }
+    </div>
   </div>
 </section>

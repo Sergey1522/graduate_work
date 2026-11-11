@@ -54,8 +54,7 @@
 .slide-text {
   position: relative;
   z-index: 2;
-  width: 50%;
-  /* height: 92%; */
+  width: 54%;
   padding: 100px 0px 98px 65px;
   background: #a8d0ff;
   border-radius: 0 0% 38% 0 / 0 21% 100% 0;
@@ -199,6 +198,85 @@
 .dot:hover:not(.active) {
   background: #fff;
 }
+/* =========================================
+
+   ========================================= */
+@media (max-width: 1024px) {
+  .promo-carousel {
+    margin-bottom: 60px;
+    transform: translate(14%);
+  }
+
+  .carousel-track {
+    height: 420px;
+  }
+
+  .slide-text {
+    padding: 60px 24px 40px 40px;
+    width: 55%;
+  }
+
+  .slide-image {
+    left: 45%;
+  }
+
+  .slide-image img {
+    width: 100%;
+    height: 420px;
+  }
+
+  .slide-title {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .slide-desc {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+  .slide-button {
+    padding: 14px 36px;
+  }
+}
+@media (max-width: 992px) {
+  .promo-carousel {
+    margin-bottom: 60px;
+    transform: translate(14%);
+  }
+
+  .carousel-track {
+    height: 420px;
+  }
+
+  .slide-text {
+    padding: 60px 24px 40px 40px;
+    width: 55%;
+  }
+
+  .slide-image {
+    left: 45%;
+  }
+
+  .slide-image img {
+    width: 100%;
+    height: 420px;
+  }
+
+  .slide-title {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .slide-desc {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+  .slide-button {
+    padding: 14px 36px;
+  }
+}
 
 /* ✅ Адаптивность */
 @media (max-width: 992px) {
@@ -251,5 +329,127 @@
   }
   .carousel-arrow.next {
     right: 8px;
+  }
+}
+
+/* =========================================
+   Мобильный (<= 768px)
+   ========================================= */
+@media (max-width: 768px) {
+  .promo-carousel {
+    margin-bottom: 40px;
+    border-radius: 12px;
+  }
+
+  .carousel-track {
+    height: auto;
+    min-height: 500px;
+  }
+
+  .slide-content {
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* Картинка — сверху, обычным блоком (не absolute) */
+  .slide-image {
+    position: relative;
+    left: 0;
+    inset: auto;
+    width: 100%;
+    height: 220px;
+    order: 1;
+  }
+
+  .slide-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Текст — снизу */
+  .slide-text {
+    position: relative;
+    width: 100%;
+    order: 2;
+    padding: 24px 20px 32px;
+    border-radius: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .slide-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+    max-width: 100%;
+  }
+
+  .slide-desc {
+    font-size: 16px;
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+
+  .slide-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  .slide-button {
+    align-self: center;
+    padding: 14px 32px;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  /* Стрелки — поверх, полупрозрачный фон для видимости */
+  .carousel-arrow {
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+  }
+
+  .carousel-arrow.prev {
+    left: 8px;
+  }
+  .carousel-arrow.next {
+    right: 8px;
+  }
+
+  .carousel-dots {
+    bottom: 12px;
+  }
+}
+
+/* =========================================
+   Очень маленький (<= 480px)
+   ========================================= */
+@media (max-width: 480px) {
+  .slide-image {
+    height: 180px;
+  }
+
+  .slide-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .slide-desc {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .slide-button {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+
+  .carousel-arrow {
+    width: 32px;
+    height: 32px;
   }
 }

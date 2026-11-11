@@ -60,9 +60,13 @@ export class Singup {
             }
             if (error) {
               this._snackbar.open(error);
-              throw new Error(error);
+              return;
             }
-            this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
+            this.authService.setTokens(
+              loginResponse.accessToken,
+              loginResponse.refreshToken,
+              loginResponse.name ?? '',
+            );
             this.authService.userId = loginResponse.userId;
             // ✅ Сохраняем имя пользователя
             localStorage.setItem('userName', this.signUpForm.value.name);

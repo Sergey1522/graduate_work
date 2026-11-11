@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthServices } from '../../../core/auth/auth-services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
-
+import { UserType } from '../../../../types/user.type';
 
 @Component({
   selector: 'app-header',
@@ -18,17 +18,17 @@ export class Header implements OnInit {
   private snackBar = inject(MatSnackBar);
   readonly isScrolled = signal(false);
   isLogged = signal<boolean>(false);
-  userName = signal<string>('');
+  userName = signal<string | null>('');
   isMenuOpen = signal<boolean>(false);
   ngOnInit(): void {
     this.isLogged.set(this.authService.getIsLoggedIn());
     if (this.isLogged()) {
-      this.userName.set(this.authService.getUserName());
+      this.loadUserProfile();
     }
     this.authService.isLogged$.subscribe((status) => {
       this.isLogged.set(status);
       if (status) {
-        this.userName.set(this.authService.getUserName());
+        this.loadUserProfile();
       } else {
         this.userName.set('');
       }
@@ -65,6 +65,19 @@ export class Header implements OnInit {
       error: () => {
         this.authService.removeTokens();
         this.router.navigate(['/']);
+      },
+    });
+  }
+  private loadUserProfile(): void {
+    this.authService.getUserProfile().subscribe({
+      next: (user: UserType) => {
+        this.userName.set(user.name);
+        localStorage.setItem('userName', user.name);
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          this.authService.logout();
+        }
       },
     });
   }

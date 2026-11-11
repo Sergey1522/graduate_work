@@ -27,6 +27,8 @@ export class BlogDetailed implements OnInit {
   private readonly snackBar = inject(MatSnackBar);
   private router = inject(Router);
   detailInfo = signal<DetailedArticleType | null>(null);
+  readonly showAllComments = signal(false);
+  private readonly limit = 3;
   readonly topArticle = signal<TopArticleType[]>([]);
   readonly commentsCount = signal(0);
   readonly comments = signal<CommentType[]>([]);
@@ -39,6 +41,16 @@ export class BlogDetailed implements OnInit {
     validators: [Validators.required],
   });
   readonly isLoggedIn = computed(() => !!this.authServices.getTokens()?.accessToken);
+
+  readonly visibleComments = computed(() => {
+    const all = this.comments();
+    console.log(all);
+    return this.showAllComments() ? all : all.slice(0, this.limit);
+  });
+
+  readonly hasHiddenComments = computed(() => this.comments().length > this.limit);
+
+  readonly hiddenCommentsCount = computed(() => Math.max(0, this.comments().length - this.limit));
   ngOnInit(): void {
     this.activatedRoute.paramMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       const url = params.get('url');
@@ -57,6 +69,9 @@ export class BlogDetailed implements OnInit {
           error: (err) => console.error('Ошибка загрузки статьи', err),
         });
     });
+  }
+  toggleShowAllComments(): void {
+    this.showAllComments.update((v) => !v);
   }
 
   private loadRelated(url: string): void {
@@ -85,6 +100,7 @@ export class BlogDetailed implements OnInit {
       .subscribe({
         next: () => {
           this.loadComments();
+          this.showAllComments.set(false);
           this.commentControl.reset();
           this.submitting.set(false);
         },

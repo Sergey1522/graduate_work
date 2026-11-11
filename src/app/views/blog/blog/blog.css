@@ -80,8 +80,6 @@
   padding: 12px 23px;
   position: absolute;
   z-index: 3;
-  right: 651px;
-  box-sizing: border-box;
 }
 .blog-sorting.open .blog-sorting-items {
   padding: 0;
@@ -142,13 +140,13 @@
   top: 10px;
   right: 9px;
   border-radius: 5px;
-  padding: 10px 18px;
+  padding: 10px 5px;
   width: 89px;
   background: #fff;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-size: 11px;
-  line-height: 130%;
+  /* line-height: 130%; */
   text-align: center;
   color: #709fdc;
   box-sizing: border-box;

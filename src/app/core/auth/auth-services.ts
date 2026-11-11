@@ -4,6 +4,7 @@ import { Observable, Subject, throwError } from 'rxjs';
 import { LoginResponseType } from '../../../types/login.response.type';
 import { Environments } from '../../environments/environments';
 import { HttpClient } from '@angular/common/http';
+import { UserType } from '../../../types/user.type';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class AuthServices {
   public accessTokenKey: string = 'accessToken';
   public refreshTokenKey: string = 'refreshToken';
   public idUserKey: string = 'idUser';
-  private userNameKey = 'userName';
+  private userNameKey = 'name';
   private http = inject(HttpClient);
   public isLogged$: Subject<boolean> = new Subject<boolean>();
   private isLogged: boolean = false;
@@ -64,12 +65,12 @@ export class AuthServices {
   public getIsLoggedIn() {
     return this.isLogged;
   }
-  public setTokens(accessToken: string, refreshToken: string, userName?: string): void {
+  public setTokens(accessToken: string, refreshToken: string, name?: string): void {
     localStorage.setItem(this.accessTokenKey, accessToken);
     localStorage.setItem(this.refreshTokenKey, refreshToken);
-    console.log(userName);
-    if (userName) {
-      localStorage.setItem(this.userNameKey, userName);
+    console.log(name);
+    if (name) {
+      localStorage.setItem(this.userNameKey, name);
     }
     this.isLogged = true;
     this.isLogged$.next(true);
@@ -86,8 +87,8 @@ export class AuthServices {
       refreshToken: localStorage.getItem(this.refreshTokenKey),
     };
   }
-  getUserName(): string {
-    return localStorage.getItem(this.userNameKey) || 'Пользователь';
+  getUserName(): string | null {
+    return localStorage.getItem(this.userNameKey);
   }
   get userId(): null | string {
     return localStorage.getItem(this.idUserKey);
@@ -98,5 +99,8 @@ export class AuthServices {
     } else {
       localStorage.removeItem(this.idUserKey);
     }
+  }
+  getUserProfile(): Observable<UserType> {
+    return this.http.get<UserType>(Environments.api + 'users');
   }
 }

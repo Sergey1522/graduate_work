@@ -9,6 +9,7 @@
 .header .container {
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 }
 .header-content {
   display: flex;
@@ -91,4 +92,121 @@
 }
 ::ng-deep .mat-mdc-menu-item-text {
   align-items: center;
+}
+
+/* =========================================
+   Планшет (<= 1200px)
+   ========================================= */
+@media (max-width: 1200px) {
+  .header-content {
+    margin-left: 40px;
+  }
+
+  .menu {
+    gap: 20px;
+  }
+
+  .menu-phone {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  .login {
+    width: auto;
+  }
+}
+
+/* =========================================
+   Планшет вертикальный (<= 992px)
+   ========================================= */
+@media (max-width: 992px) {
+  .header {
+    padding: 20px 0;
+  }
+
+  .header-content {
+    margin-left: 24px;
+  }
+
+  .menu {
+    gap: 16px;
+  }
+
+  .menu-item-link {
+    font-size: 14px;
+  }
+
+  .menu-phone {
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  .menu-phone a {
+    font-size: 14px;
+  }
+
+  .login {
+    width: auto;
+  }
+}
+
+/* =========================================
+   Мобильный (<= 768px)
+   ========================================= */
+@media (max-width: 768px) {
+  .header {
+    padding: 16px 0;
+  }
+
+  .header .container {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .header-content {
+    margin-left: 0;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* Меню скрываем на мобильных — показываем бургер (см. шаблон ниже) */
+  .navbar {
+    display: none;
+  }
+
+  .menu-phone {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .menu-phone a {
+    font-size: 14px;
+  }
+
+  .login {
+    width: auto;
+  }
+
+  .login-action span {
+    font-size: 14px;
+  }
+}
+
+/* =========================================
+   Маленький мобильный (<= 480px)
+   ========================================= */
+@media (max-width: 480px) {
+  .logo img {
+    width: 100px;
+  }
+
+  .menu-phone a {
+    font-size: 13px;
+  }
+
+  .login-action span {
+    font-size: 13px;
+  }
 }

@@ -167,13 +167,13 @@
   top: 10px;
   right: 9px;
   border-radius: 5px;
-  padding: 10px 18px;
+  padding: 10px 5px;
   width: 89px;
   background: #fff;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-size: 11px;
-  line-height: 130%;
+  /* line-height: 130%; */
   text-align: center;
   color: #709fdc;
 }
@@ -275,4 +275,28 @@
 }
 .comment-action span {
   margin-right: 3px;
+}
+
+.load-more-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #709fdc;
+  margin-top: 20px;
+  transition: opacity 0.2s;
+}
+
+.load-more-btn:hover {
+  opacity: 0.8;
+}
+
+.load-more-btn svg {
+  transition: transform 0.3s ease;
 }
