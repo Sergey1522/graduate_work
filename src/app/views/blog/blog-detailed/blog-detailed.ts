@@ -32,6 +32,7 @@ export class BlogDetailed implements OnInit {
   readonly topArticle = signal<TopArticleType[]>([]);
   readonly commentsCount = signal(0);
   readonly comments = signal<CommentType[]>([]);
+  readonly myActions = signal<Record<string, 'like' | 'dislike'>>({});
   urlImg = Environments.urlImg;
   breadcrumb = signal<string>('');
   readonly submitting = signal(false);
@@ -65,6 +66,7 @@ export class BlogDetailed implements OnInit {
             this.breadcrumb.set(data.title);
             this.loadRelated(data.url);
             this.loadComments();
+            this.loadMyActions();
           },
           error: (err) => console.error('Ошибка загрузки статьи', err),
         });
@@ -143,6 +145,26 @@ export class BlogDetailed implements OnInit {
         },
       });
   }
+  private loadMyActions(): void {
+    const articleId = this.detailInfo()?.id;
+    if (!articleId) return;
+
+    this.articleService
+      .getArticleCommentActions(articleId)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (actions) => {
+          const map: Record<string, 'like' | 'dislike'> = {};
+          console.log(map);
+          actions.forEach((action) => (map[action.comment] = action.action));
+          this.myActions.set(map);
+        },
+        error: (err) => {
+          console.error('Ошибка загрузки реакций', err);
+          this.myActions.set({});
+        },
+      });
+  }
   like(comment: CommentType, action: 'like' | 'dislike'): void {
     const articleId = this.detailInfo()?.id;
     if (!articleId) return;
@@ -153,6 +175,7 @@ export class BlogDetailed implements OnInit {
       .subscribe({
         next: () => {
           this.loadComments();
+          this.loadMyActions();
         },
         error: (err: HttpErrorResponse) => {
           console.error('Ошибка реакции', err);
@@ -163,5 +186,12 @@ export class BlogDetailed implements OnInit {
           }
         },
       });
+  }
+  isLiked(commentId: string): boolean {
+    return this.myActions()[commentId] === 'like';
+  }
+
+  isDisliked(commentId: string): boolean {
+    return this.myActions()[commentId] === 'dislike';
   }
 }

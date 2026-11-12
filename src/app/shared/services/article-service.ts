@@ -58,4 +58,12 @@ export class ArticleService {
       { action },
     );
   }
+  getArticleCommentActions(
+    articleId: string,
+  ): Observable<{ comment: string; action: 'like' | 'dislike' }[]> {
+    return this.http.get<{ comment: string; action: 'like' | 'dislike' }[]>(
+      Environments.api + 'comments/article-comment-actions',
+      { params: { articleId } },
+    );
+  }
 }
